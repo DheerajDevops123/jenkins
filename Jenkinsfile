@@ -1,6 +1,6 @@
 pipeline {
   stages {
-     state('One') {
+     stage('One') {
         steps {
           sh 'echo Hello World'
         }
