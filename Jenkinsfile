@@ -5,9 +5,11 @@ pipeline {
 //            label 'WORKSTATION'
 //        }
 //    }
+
     enviroment {
         SAMPLE_URL = "google.com"
     }
+
     stages {
         stage('One') {
             agent {
