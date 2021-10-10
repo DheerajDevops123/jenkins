@@ -1,15 +1,31 @@
 pipeline {
-    agent any
-  stages {
-     stage('One') {
-        steps {
-          sh 'echo Hello World'
+//    agent {
+//        node {
+//            label 'WORKSTATION'
+//        }
+//    }
+    stages {
+        stage('One') {
+            agent {
+                node {
+                    label 'NODEJS'
+                }
+            }
+            steps {
+                sh 'echo Hello World'
+            }
         }
-     }
-      stage('Two') {
-          steps {
-              sh 'echo Hello'
-          }
-      }
-  }
+        stage('Two') {
+            agent {
+                node {
+                    label 'JAVA'
+                }
+            }
+            steps {
+                sh 'echo Hello'
+            }
+
+        }
+    }
 }
+
