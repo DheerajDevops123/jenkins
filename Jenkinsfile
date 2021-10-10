@@ -6,7 +6,7 @@ pipeline {
 //        }
 //    }
     enviroment {
-        URL = "ggogle.com"
+        URL = "google.com"
     }
     stages {
         stage('One') {
@@ -33,7 +33,7 @@ pipeline {
 
     }
 
-    post {
+    /*post {
         success {
             slackSend channel: '#testing-jenkins', color: 'good', message: 'SUCCESS'
         }
@@ -41,6 +41,7 @@ pipeline {
             slackSend channel: '#testing-jenkins', color: 'danger', message: 'FAILURE'
         }
     }
+    */
 }
 
 
