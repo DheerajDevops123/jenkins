@@ -7,6 +7,7 @@ pipeline {
 //    }
     environment {
         SAMPLE_URL = "google.com"
+        SLACK_KEY =  credentials('slack')
     }
 
     stages {
@@ -19,6 +20,7 @@ pipeline {
             steps {
                 sh 'echo Hello World'
                 sh 'echo ${SAMPLE_URL}'
+                sh 'echo ${SLACK_KEY}'
             }
         }
         stage('Two') {
