@@ -30,3 +30,9 @@ pipeline {
     }
 }
 
+//post {
+//    always {
+//        slackSend channel: '#testing-jenkins', message: 'Hello'
+//    }
+//}
+
