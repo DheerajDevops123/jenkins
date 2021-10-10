@@ -10,9 +10,9 @@ pipeline {
                 node {
                     label 'NODEJS'
                 }
-            }
-            steps {
-                sh 'echo Hello World'
+                steps {
+                    sh 'echo Hello World'
+                }
             }
         }
         stage('Two') {
@@ -20,9 +20,9 @@ pipeline {
                 node {
                     label 'JAVA'
                 }
-            }
-            steps {
-                sh 'echo Hello'
+                steps {
+                    sh 'echo Hello'
+                }
             }
 
         }
