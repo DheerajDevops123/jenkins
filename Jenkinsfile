@@ -31,8 +31,12 @@ pipeline {
 }
 
 post {
-    success { slackSend channel: '#testing-jenkins', color: 'good', message: 'Hello'    }
-    failure { slackSend channel: '#testing-jenkins', color: 'danger', message: 'Hello'  }
+    success {
+        slackSend channel: '#testing-jenkins', color: 'good', message: 'SUCCESS'
+    }
+    failure {
+        slackSend channel: '#testing-jenkins', color: 'danger', message: 'FAILURE'
+    }
 }
 
 
