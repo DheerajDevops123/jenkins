@@ -30,9 +30,10 @@ pipeline {
     }
 }
 
-//post {
-//    always {
-//        slackSend channel: '#testing-jenkins', message: 'Hello'
-//    }
-//}
+/*post {
+    success { slackSend channel: '#testing-jenkins', color: 'good', message: 'Hello'    }
+    failure { slackSend channel: '#testing-jenkins', color: 'danger', message: 'Hello'  }
+}
+
+ */
 
