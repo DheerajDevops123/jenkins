@@ -23,7 +23,7 @@ pipeline {
                 }
             }
             steps {
-                she 'echo Hello'
+                sh 'echo Hello'
             }
         }
 
