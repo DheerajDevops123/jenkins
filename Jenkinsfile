@@ -6,7 +6,7 @@ pipeline {
 //        }
 //    }
     enviroment {
-        URL = "google.com"
+        SAMPLE_URL = "google.com"
     }
     stages {
         stage('One') {
@@ -17,7 +17,7 @@ pipeline {
             }
             steps {
                 sh 'echo Hello World'
-                echo ${URL}
+                echo ${SAMPLE_URL}
             }
         }
         stage('Two') {
