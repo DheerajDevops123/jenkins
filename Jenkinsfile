@@ -27,26 +27,26 @@ pipeline {
         SAMPLE_URL = "google.com"
         SLACK_KEY = credentials('slack')
     }
+    parallel {
+        stages {
+            stage('Example') {
+                agent {
+                    node {
+                        label 'PYTHON'
+                    }
+                }
+                steps {
+                    sh "echo Hello ${params.PERSON}"
 
-    stages {
-        stage('Example') {
-            agent {
-                node {
-                    label 'PYTHON'
+                    sh "echo Biography: ${params.BIOGRAPHY}"
+
+                    sh "echo Toggle: ${params.TOGGLE}"
+
+                    sh "echo Choice: ${params.CHOICE}"
+
+                    sh "echo Password: ${params.PASSWORD}"
                 }
             }
-            steps {
-                sh "echo Hello ${params.PERSON}"
-
-                sh "echo Biography: ${params.BIOGRAPHY}"
-
-                sh "echo Toggle: ${params.TOGGLE}"
-
-                sh "echo Choice: ${params.CHOICE}"
-
-                sh "echo Password: ${params.PASSWORD}"
-            }
-        }
 
             stage('One') {
                 agent {
@@ -90,6 +90,7 @@ pipeline {
 
 
             }
+        }
     }
 }
 
