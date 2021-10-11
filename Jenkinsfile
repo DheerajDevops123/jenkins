@@ -25,6 +25,11 @@ pipeline {
     }
 
     stages {
+        agent {
+            node {
+                label 'PYTHON'
+            }
+        }
         stage('Example') {
             steps {
                 sh 'echo Hello ${params.PERSON}'
