@@ -27,8 +27,9 @@ pipeline {
         SAMPLE_URL = "google.com"
         SLACK_KEY = credentials('slack')
     }
-    parallel {
-        stages {
+
+    stages {
+        parallel {
             stage('Example') {
                 agent {
                     node {
@@ -87,8 +88,6 @@ pipeline {
                     sh 'mvn --version'
                     echo "Hello, ${PERSON}, nice to meet you."
                 }
-
-
             }
         }
     }
