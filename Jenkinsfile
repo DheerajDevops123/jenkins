@@ -29,7 +29,7 @@ pipeline {
     }
 
     stages {
-        parallel {
+
             stage('Example') {
                 agent {
                     node {
@@ -89,9 +89,9 @@ pipeline {
                     echo "Hello, ${PERSON}, nice to meet you."
                 }
             }
-        }
     }
 }
+
 
 
     /*post {
