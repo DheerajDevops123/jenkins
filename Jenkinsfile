@@ -69,13 +69,24 @@ pipeline {
                 environment {
                     SAMPLE_URL = "yahoo.com"
                 }
+                input {
+                    message "Should we continue?"
+                    ok "Yes, we should."
+//                    submitter "alice,bob"
+                    parameters {
+                        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    }
+                }
+
                 steps {
                     sh 'echo Hello'
                     sh 'echo ${SAMPLE_URL}'
                     sh 'mvn --version'
+                    echo "Hello, ${PERSON}, nice to meet you."
                 }
-            }
 
+
+            }
     }
 }
 
