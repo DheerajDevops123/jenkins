@@ -66,6 +66,9 @@ pipeline {
                         label 'JAVA'
                     }
                 }
+                when {
+                    environment name: 'SAMPLE_URL', value: 'yahoo.com'
+                }
                 environment {
                     SAMPLE_URL = "yahoo.com"
                 }
