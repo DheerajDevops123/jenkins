@@ -87,7 +87,7 @@ pipeline {
                         sh 'echo Hello'
                         sh 'echo ${SAMPLE_URL}'
                         sh 'mvn --version'
-                        echo "Hello, ${PERSON}, nice to meet you."
+//                        echo "Hello, ${PERSON}, nice to meet you."
                     }
                 }
             }
