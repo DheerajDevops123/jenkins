@@ -25,12 +25,12 @@ pipeline {
     }
 
     stages {
-        agent {
-            node {
-                label 'PYTHON'
-            }
-        }
         stage('Example') {
+            agent {
+                node {
+                    label 'PYTHON'
+                }
+            }
             steps {
                 sh 'echo Hello ${params.PERSON}'
 
