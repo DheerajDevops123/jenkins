@@ -21,7 +21,7 @@ pipeline {
 
     environment {
         SAMPLE_URL = "google.com"
-        SLACK_KEY =  credentials('slack')
+        SLACK_KEY = credentials('slack')
     }
 
     stages {
@@ -37,36 +37,38 @@ pipeline {
 
                 echo "Password: ${params.PASSWORD}"
             }
-            
-        stage('One') {
-            agent {
-                node {
-                    label 'NODEJS'
+        }
+
+            stage('One') {
+                agent {
+                    node {
+                        label 'NODEJS'
+                    }
+                }
+                steps {
+                    sh 'echo Hello World'
+                    sh 'echo ${SAMPLE_URL}'
+                    sh 'echo ${SLACK_KEY}'
                 }
             }
-            steps {
-                sh 'echo Hello World'
-                sh 'echo ${SAMPLE_URL}'
-                sh 'echo ${SLACK_KEY}'
-            }
-        }
-        stage('Two') {
-            agent {
-                node {
-                    label 'JAVA'
+            stage('Two') {
+                agent {
+                    node {
+                        label 'JAVA'
+                    }
+                }
+                environment {
+                    SAMPLE_URL = "yahoo.com"
+                }
+                steps {
+                    sh 'echo Hello'
+                    sh 'echo ${SAMPLE_URL}'
                 }
             }
-            environment {
-                SAMPLE_URL = "yahoo.com"
-            }
-            steps {
-                sh 'echo Hello'
-                sh 'echo ${SAMPLE_URL}'
-            }
-        }
 
     }
 }
+
 
     /*post {
         success {
