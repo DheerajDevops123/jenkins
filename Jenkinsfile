@@ -27,15 +27,15 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${params.PERSON}"
+                sh 'echo Hello ${params.PERSON}'
 
-                echo "Biography: ${params.BIOGRAPHY}"
+                sh 'echo Biography: ${params.BIOGRAPHY}'
 
-                echo "Toggle: ${params.TOGGLE}"
+                sh 'echo Toggle: ${params.TOGGLE}'
 
-                echo "Choice: ${params.CHOICE}"
+                sh 'echo Choice: ${params.CHOICE}'
 
-                echo "Password: ${params.PASSWORD}"
+                sh 'echo Password: ${params.PASSWORD}'
             }
         }
 
