@@ -32,15 +32,15 @@ pipeline {
                 }
             }
             steps {
-                sh 'echo Hello ${params.PERSON}'
+                sh "echo Hello ${params.PERSON}"
 
-                sh 'echo Biography: ${params.BIOGRAPHY}'
+                sh "echo Biography: ${params.BIOGRAPHY}"
 
-                sh 'echo Toggle: ${params.TOGGLE}'
+                sh "echo Toggle: ${params.TOGGLE}"
 
-                sh 'echo Choice: ${params.CHOICE}'
+                sh "echo Choice: ${params.CHOICE}"
 
-                sh 'echo Password: ${params.PASSWORD}'
+                sh "echo Password: ${params.PASSWORD}"
             }
         }
 
