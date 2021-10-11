@@ -27,70 +27,68 @@ pipeline {
         SAMPLE_URL = "google.com"
         SLACK_KEY = credentials('slack')
     }
+
     stages {
-        steps{
-            sh 'echo hello'
-        }
-    }
-    stages {
-        parallel {
-            stage('Example') {
-                agent {
-                    node {
-                        label 'PYTHON'
+        stage('par 1') {
+            parallel {
+                stage('Example') {
+                    agent {
+                        node {
+                            label 'PYTHON'
+                        }
+                    }
+                    steps {
+                        sh "echo Hello ${params.PERSON}"
+
+                        sh "echo Biography: ${params.BIOGRAPHY}"
+
+                        sh "echo Toggle: ${params.TOGGLE}"
+
+                        sh "echo Choice: ${params.CHOICE}"
+
+                        sh "echo Password: ${params.PASSWORD}"
                     }
                 }
-                steps {
-                    sh "echo Hello ${params.PERSON}"
 
-                    sh "echo Biography: ${params.BIOGRAPHY}"
-
-                    sh "echo Toggle: ${params.TOGGLE}"
-
-                    sh "echo Choice: ${params.CHOICE}"
-
-                    sh "echo Password: ${params.PASSWORD}"
-                }
-            }
-
-            stage('One') {
-                agent {
-                    node {
-                        label 'NODEJS'
+                stage('One') {
+                    agent {
+                        node {
+                            label 'NODEJS'
+                        }
+                    }
+                    steps {
+                        sh 'echo Hello World'
+                        sh 'echo ${SAMPLE_URL}'
+                        sh 'echo ${SLACK_KEY}'
                     }
                 }
-                steps {
-                    sh 'echo Hello World'
-                    sh 'echo ${SAMPLE_URL}'
-                    sh 'echo ${SLACK_KEY}'
-                }
-            }
-            stage('Two') {
-                agent {
-                    node {
-                        label 'JAVA'
+                stage('Two') {
+                    agent {
+                        node {
+                            label 'JAVA'
+                        }
                     }
-                }
-                when {
-                    environment name: 'SAMPLE_URL', value: 'yahoo'
-                }
-                environment {
-                    SAMPLE_URL = "yahoo.com"
-                }
-                input {
-                    message "Should we continue?"
-                    ok "Yes, we should."
+                    when {
+                        environment name: 'SAMPLE_URL', value: 'yahoo'
+                    }
+                    environment {
+                        SAMPLE_URL = "yahoo.com"
+                    }
+                    input {
+                        message "Should we continue?"
+                        ok "Yes, we should."
 //                    submitter "alice,bob"
-                    parameters {
-                        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                        parameters {
+                            string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                        }
                     }
-                }
 
-                steps {
-                    sh 'echo Hello'
-                    sh 'echo ${SAMPLE_URL}'
-                    sh 'mvn --version'
-                    echo "Hello, ${PERSON}, nice to meet you."
+                    steps {
+                        sh 'echo Hello'
+                        sh 'echo ${SAMPLE_URL}'
+                        sh 'mvn --version'
+                        echo "Hello, ${PERSON}, nice to meet you."
+                    }
                 }
             }
         }
