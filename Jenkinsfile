@@ -67,7 +67,7 @@ pipeline {
                     }
                 }
                 when {
-                    environment name: 'SAMPLE_URL', value: 'yahoo.com'
+                    environment name: 'SAMPLE_URL', value: 'yahoo'
                 }
                 environment {
                     SAMPLE_URL = "yahoo.com"
