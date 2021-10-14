@@ -48,4 +48,3 @@ def call(String AGENT, String COMPONENT) {
     }
   }
 }
-
