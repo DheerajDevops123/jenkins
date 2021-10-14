@@ -8,9 +8,11 @@ def call(String AGENT, String COMPONENT) {
     }
 
     stages {
-
       stage('compile') {
-
+        when {
+          anyOf {expression { COMPONENT == "JAVA"}
+          }
+        }
         steps {
           echo ' Nothing to do with Compilation'
         }
