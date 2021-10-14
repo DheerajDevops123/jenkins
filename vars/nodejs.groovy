@@ -20,7 +20,7 @@ def call(String AGENT, String COMPONENT) {
            -Dsonar.projectKey=${COMPONENT}
            -Dsonar.sources=. 
            -Dsonar.host.url=http://172.31.0.37:9000 
-           -Dsonar.login=${SONAR_TOKEN}
+           -Dsonar.login=$SONAR_TOKEN
           """
         }
       }
