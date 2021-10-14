@@ -1,4 +1,4 @@
-def call(String AGENT) {
+def call(String AGENT, String COMPONENT) {
   pipeline {
     agent {
       node {
@@ -30,7 +30,7 @@ def call(String AGENT) {
         steps {
           sh '''
           cd static
-          zip -r frontend.zip *
+          zip -r ${COMPONENT}.zip *
         '''
         }
       }
