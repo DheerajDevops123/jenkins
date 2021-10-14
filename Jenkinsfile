@@ -125,4 +125,4 @@
 }
 */
 
-evenOrOdd(currentBuild.getNumber())
+evenORodd(currentBuild.getNumber())
