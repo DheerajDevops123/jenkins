@@ -109,7 +109,7 @@
 
 @Library('roboshop') _
 
-pipeline {
+/*pipeline {
   agent none
   stages {
     stage ('Example') {
@@ -123,3 +123,6 @@ pipeline {
     }
   }
 }
+*/
+
+evenOrOdd(currentBuild.getNumber())
