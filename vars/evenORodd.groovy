@@ -1,4 +1,4 @@
-// vars/evenOrOdd.groovy declaring the pipelines directly in the shared library
+// vars/evenOrOdd.groovy declaring the pipelines directly in the shared library (shared declartive pieline)
 def call(int buildNumber) {
   if (buildNumber % 2 == 0) {
     pipeline {
@@ -24,3 +24,4 @@ def call(int buildNumber) {
     }
   }
 }
+
