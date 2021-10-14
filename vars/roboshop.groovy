@@ -28,10 +28,10 @@ def call(String AGENT, String COMPONENT) {
       }
       stage('Prepare Artifacts') {
         steps {
-          sh '''
+          sh """
           cd static
           zip -r ${COMPONENT}.zip *
-        '''
+        """
         }
       }
       stage('Publish Artifacts') {
