@@ -9,15 +9,20 @@ def call(String AGENT, String COMPONENT) {
 
     stages {
 
-      stage('compile') {
+      stage('Compile') {
+//        when {
+//          anyOf {
+//            expression { COMPONENT == "JAVA" }
+//          }
+//        }
         steps {
-          echo ' Nothing to do with Compilation'
+          echo 'Nothing to do for compilation'
         }
       }
 
-      stage('Check the Code Quality') {
+      stage('Check Code Quality') {
         steps {
-          echo ' Code Quality'
+          echo 'Code Quality'
         }
       }
 
@@ -29,16 +34,16 @@ def call(String AGENT, String COMPONENT) {
 
       stage('Unit Tests') {
         steps {
-          echo 'Unit Tests'
+          echo 'Unit tests'
         }
       }
 
-      stage('Prepare Artifacts') {
+      stage('Prepare Artifact') {
         steps {
           sh """
-          cd static
-          zip -r ${COMPONENT}.zip *
-        """
+            cd static
+            zip -r ${COMPONENT}.zip * 
+          """
         }
       }
 
@@ -47,6 +52,7 @@ def call(String AGENT, String COMPONENT) {
           echo 'Publish Artifacts'
         }
       }
+
     }
 
     post {
@@ -55,4 +61,5 @@ def call(String AGENT, String COMPONENT) {
       }
     }
   }
+
 }
