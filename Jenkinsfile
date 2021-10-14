@@ -109,5 +109,17 @@
 
 @Library('roboshop') _
 
-log.info 'Starting'
-log.warning 'Nothing to do!'
+pipeline {
+  agent none
+  stages {
+    stage ('Example') {
+      steps {
+        // log.info 'Starting' script is an option to run groovy code
+        script {
+          log.info 'Starting'
+          log.warning 'Nothing to do!'
+        }
+      }
+    }
+  }
+}
