@@ -8,19 +8,19 @@ def call(String AGENT, String COMPONENT) {
     }
 
     environment {
-      SONAR_TOKEN = credentials('SONAR_TOKEN')
+      SONAR_KEY = credentials('SONAR_TOKEN')
     }
 
     stages {
 
       stage('Check the Code Quality') {
         steps {
-          sh """"
+          sh """
             sonar-scanner 
             Dsonar.projectKey=${COMPONENT}
             Dsonar.sources=. 
             Dsonar.host.url=http://172.31.0.37:9000 
-            Dsonar.login=${SONAR_TOKEN}
+            Dsonar.login=${SONAR_KEY}
           """
         }
       }
