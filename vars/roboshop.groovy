@@ -21,7 +21,7 @@ def call(String AGENT, String COMPONENT) {
           echo 'Lint Checks'
         }
       }
-      stage('Unit Tests'){
+      stage('Unit Tests') {
         steps {
           echo 'Unit Tests'
         }
@@ -38,6 +38,12 @@ def call(String AGENT, String COMPONENT) {
         steps {
           echo 'Publish Artifacts'
         }
+      }
+    }
+    post {
+      // Clean after build
+      always {
+        cleanWs()
       }
     }
   }
