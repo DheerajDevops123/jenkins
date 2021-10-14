@@ -8,16 +8,6 @@ def call(String AGENT, String COMPONENT) {
     }
 
     stages {
-      stage('compile') {
-        when {
-          anyOf {
-            expression { COMPONENT == "SHIPPING" }
-          }
-        }
-        steps {
-          echo ' Nothing to do with Compilation'
-        }
-      }
 
       stage('Check the Code Quality') {
         steps {
