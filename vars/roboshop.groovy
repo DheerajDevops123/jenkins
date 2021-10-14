@@ -10,6 +10,7 @@ def call(String AGENT, String COMPONENT) {
     stages {
 
       stage('compile') {
+
         steps {
           echo ' Nothing to do with Compilation'
         }
@@ -49,10 +50,10 @@ def call(String AGENT, String COMPONENT) {
       }
     }
 
-//    post {
-//      always {
-//        cleanWs()
-//      }
-//    }
+    post {
+      always {
+        cleanWs()
+      }
+    }
   }
 }
