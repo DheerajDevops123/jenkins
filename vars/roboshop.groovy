@@ -10,7 +10,7 @@ def call(String AGENT, String COMPONENT) {
     stages {
       stage('compile') {
         when {
-          anyOf {expression { COMPONENT == "JAVA"}
+          anyOf {expression { COMPONENT == "SHIPPING"}
           }
         }
         steps {
