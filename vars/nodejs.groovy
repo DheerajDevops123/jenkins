@@ -1,9 +1,9 @@
-def call(String AGENT, String COMPONENT) {
+def call(String COMPONENT) {
   pipeline {
 
     agent {
       node {
-        label "${AGENT}"
+        label "NODEJS"
       }
     }
 
