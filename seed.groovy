@@ -24,6 +24,10 @@ folder('CI-Pipelines') {
   description('CI-Pipelines')
 }
 
+def component = ["cart", "catalogue", "user", "frontend", "shipping", "payment"]
+
+def count= (component.size)
+
 pipelineJob('CI-Pipelines/frontend') {
   configure { flowdefinition ->
     flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
