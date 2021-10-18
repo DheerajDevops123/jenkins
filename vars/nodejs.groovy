@@ -24,7 +24,7 @@ def call(String COMPONENT) {
 
       stage("Check the Code Quality") {
         steps {
-          echo CodeQuality
+          echo "CodeQuality"
 //          sh "sonar-quality-gate.sh admin Ccfp*123 172.31.0.37 ${COMPONENT}"
         }
       }
