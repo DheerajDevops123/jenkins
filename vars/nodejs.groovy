@@ -37,7 +37,8 @@ def call(String COMPONENT) {
 
       stage('Unit Tests') {
         steps {
-          echo 'Unit Tests'
+//          echo 'Unit Tests'
+          sh '/node_modules/eslint/bin/eslint.js'
         }
       }
 
