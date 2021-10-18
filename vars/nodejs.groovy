@@ -31,14 +31,14 @@ def call(String COMPONENT) {
 
       stage('Lint Checks') {
         steps {
-          echo 'Lint Checks'
+//          echo 'Lint Checks'
+            sh "/home/centos/node_modules/eslint/bin/eslint.js"
         }
       }
 
       stage('Unit Tests') {
         steps {
-//          echo 'Unit Tests'
-          sh "/home/centos/node_modules/eslint/bin/eslint.js"
+          echo 'Unit Tests'
         }
       }
 
