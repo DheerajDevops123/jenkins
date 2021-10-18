@@ -13,11 +13,17 @@ def call(String COMPONENT) {
 
     stages {
 
-      stage('Check the Code Quality') {
+      stage('Submit the Code Quality') {
         steps {
           sh """
             sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.0.37:9000 -Dsonar.login=${SONAR_KEY}
           """
+        }
+      }
+
+      stage("Check the Code Quality") {
+        steps {
+          sh "sonar-quality-gate.sh admin Ccfp*123 172.31.0.37 ${COMPONENT}"
         }
       }
 
