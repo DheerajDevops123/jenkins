@@ -44,8 +44,8 @@ def call(String COMPONENT) {
         steps {
           echo 'Unit Tests'
           sh """
-          VERSION= `echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
-          echo version= $VERSION
+            VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \\$NF}'`
+            echo version = \$VERSION
          """
         }
       }
@@ -54,9 +54,9 @@ def call(String COMPONENT) {
         when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           sh """
-          npm install
-          VERSION= `echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
-          zip -r ${COMPONENT}.zip *
+            npm install
+            VERSION= `echo ${GIT_BRANCH} | awk -F / '{print \$NF}'`
+            zip -r ${COMPONENT}.zip *
         """
         }
       }
