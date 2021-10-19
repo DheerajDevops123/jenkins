@@ -35,9 +35,13 @@ for(int i=0;i<count;i++) {
           'userRemoteConfigs' {
             'hudson.plugins.git.UserRemoteConfig' {
               'url'("https://saidheeraj52056@dev.azure.com/saidheeraj52056/RoboShop/_git/${j}")
+              'refspec'('\'+refs/tags/*\':\'refs/remotes/origin/tags/*\'')
             }
           }
           'branches' {
+            'hudson.plugins.git.BranchSpec' {
+              'name'('**/tags/**')
+            }
             'hudson.plugins.git.BranchSpec' {
               'name'('*/main')
             }

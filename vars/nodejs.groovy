@@ -11,6 +11,10 @@ def call(String COMPONENT) {
       SONAR_KEY = credentials('SONAR_TOKEN')
     }
 
+    triggers {
+      pollSCM('H/2 * * * 1-5')
+    }
+
     stages {
 
       stage('Submit the Code Quality') {
@@ -44,7 +48,7 @@ def call(String COMPONENT) {
       }
 
       stage('Prepare Artifacts') {
-        when { buildingTag() }
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           sh """
           cd static
@@ -54,7 +58,7 @@ def call(String COMPONENT) {
       }
 
       stage('Publish Artifacts') {
-        when { buildingTag() }
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           echo 'Publish Artifacts'
         }
