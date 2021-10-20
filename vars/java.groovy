@@ -3,7 +3,7 @@ def call(String COMPONENT) {
 
     agent {
       node {
-        label "JAVA"
+        label "SHIPPING"
       }
     }
 
@@ -11,18 +11,16 @@ def call(String COMPONENT) {
       SONAR_KEY = credentials('SONAR_TOKEN')
     }
 
-    stages {
+//    triggers {
+//      pollSCM('H/2 * * * 1-5')
+//    }
 
-      stage('Code Compile') {
-        steps {
-          sh 'mvn compile'
-        }
-      }
+    stages {
 
       stage('Submit the Code Quality') {
         steps {
           sh """
-            #sonar-scanner -Dsonar.java.binaries=target/. -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.0.37:9000 -Dsonar.login=${SONAR_KEY}
+            #sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.0.37:9000 -Dsonar.login=${SONAR_KEY}
             echo Submit
           """
         }
@@ -30,33 +28,42 @@ def call(String COMPONENT) {
 
       stage("Check the Code Quality") {
         steps {
-          //sh "sonar-quality-gate.sh admin Ccfp*123 172.31.0.37 ${COMPONENT}"
           echo "CodeQuality"
+//          sh "sonar-quality-gate.sh admin Ccfp*123 172.31.0.37 ${COMPONENT}"
         }
       }
 
       stage('Lint Checks') {
         steps {
           echo 'Lint Checks'
+//            sh '/home/centos/node_modules/jslint/bin/jslint.js'
         }
       }
 
       stage('Unit Tests') {
         steps {
           echo 'Unit Tests'
+          sh """
+            VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
+            echo version = \$VERSION
+         """
         }
       }
 
       stage('Prepare Artifacts') {
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           sh """
-          cd static
-          zip -r ${COMPONENT}.zip *
+            mvn clean package
+            mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+            VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
+            zip -r ${COMPONENT}-\${VERSION}.zip *
         """
         }
       }
 
       stage('Publish Artifacts') {
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           echo 'Publish Artifacts'
         }
