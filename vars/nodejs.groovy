@@ -11,9 +11,9 @@ def call(String COMPONENT) {
       SONAR_KEY = credentials('SONAR_TOKEN')
     }
 
-    triggers {
-      pollSCM('H/2 * * * 1-5')
-    }
+//    triggers {
+//      pollSCM('H/2 * * * 1-5')
+//    }
 
     stages {
 
