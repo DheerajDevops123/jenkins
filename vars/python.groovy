@@ -3,13 +3,17 @@ def call(String COMPONENT) {
 
     agent {
       node {
-        label "PYTHON"
+        label "NODEJS"
       }
     }
 
     environment {
       SONAR_KEY = credentials('SONAR_TOKEN')
     }
+
+//    triggers {
+//      pollSCM('H/2 * * * 1-5')
+//    }
 
     stages {
 
@@ -24,14 +28,15 @@ def call(String COMPONENT) {
 
       stage("Check the Code Quality") {
         steps {
+          echo "CodeQuality"
 //          sh "sonar-quality-gate.sh admin Ccfp*123 172.31.0.37 ${COMPONENT}"
-            echo "CodeQuality"
         }
       }
 
       stage('Lint Checks') {
         steps {
           echo 'Lint Checks'
+//            sh '/home/centos/node_modules/jslint/bin/jslint.js'
         }
       }
 
@@ -42,15 +47,17 @@ def call(String COMPONENT) {
       }
 
       stage('Prepare Artifacts') {
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           sh """
-          cd static
-          zip -r ${COMPONENT}.zip *
+            VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
+            zip -r ${COMPONENT}-\${VERSION}.zip *.py *.ini requriments.txt
         """
         }
       }
 
       stage('Publish Artifacts') {
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           echo 'Publish Artifacts'
         }
