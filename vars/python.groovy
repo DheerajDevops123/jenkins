@@ -11,9 +11,9 @@ def call(String COMPONENT) {
       SONAR_KEY = credentials('SONAR_TOKEN')
     }
 
-//    triggers {
-//      pollSCM('H/2 * * * 1-5')
-//    }
+    triggers {
+      pollSCM('H/2 * * * 1-5')
+    }
 
     stages {
 
@@ -51,7 +51,7 @@ def call(String COMPONENT) {
         steps {
           sh """
             VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
-            zip -r ${COMPONENT}-\${VERSION}.zip *.py *.ini requriments.txt
+            zip -r ${COMPONENT}-\${VERSION}.zip *.py *.ini requirements.txt
         """
         }
       }
