@@ -3,7 +3,7 @@ def call(String COMPONENT) {
 
     agent {
       node {
-        label "PAYMENT"
+        label "PYTHON"
       }
     }
 
