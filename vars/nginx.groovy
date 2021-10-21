@@ -57,7 +57,7 @@ def call(String COMPONENT) {
           sh """
             cd static
             VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
-            zip -r ..${COMPONENT}-\${VERSION}.zip *
+            zip -r ../${COMPONENT}-\${VERSION}.zip *
           """
         }
       }
