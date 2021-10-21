@@ -53,7 +53,7 @@ def call(String COMPONENT) {
           sh """
             VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
             zip -r ${COMPONENT}-\${VERSION}.zip *.py *.ini requirements.txt
-        """
+          """
         }
       }
 
