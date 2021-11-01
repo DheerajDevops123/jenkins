@@ -95,7 +95,7 @@ pipelineJob('Mutable/ALB') {
           }
         }
       }
-      'scriptPath'('loadbalancers/Jenkinsfile')
+      'scriptPath'('alb/Jenkinsfile')
       'lightweight'(true)
     }
   }
