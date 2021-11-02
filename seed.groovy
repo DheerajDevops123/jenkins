@@ -101,6 +101,27 @@ pipelineJob('Mutable/ALB') {
   }
 }
 
+pipelineJob('Mutable/Create') {
+  configure { flowdefinition ->
+    flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
+      'scm'(class:'hudson.plugins.git.GitSCM',plugin:'git') {
+        'userRemoteConfigs' {
+          'hudson.plugins.git.UserRemoteConfig' {
+            'url'('https://saidheeraj52056@dev.azure.com/saidheeraj52056/RoboShop/_git/terraform-vpc')
+          }
+        }
+        'branches' {
+          'hudson.plugins.git.BranchSpec' {
+            'name'('*/main')
+          }
+        }
+      }
+      'scriptPath'('Jenkinsfile-create')
+      'lightweight'(true)
+    }
+  }
+}
+
 pipelineJob('Mutable/Destroy') {
   configure { flowdefinition ->
     flowdefinition << delegate.'definition'(class:'org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition',plugin:'workflow-cps') {
