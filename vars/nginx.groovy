@@ -21,7 +21,7 @@ def call(String COMPONENT) {
       stage('Submit the Code Quality') {
         steps {
           sh """
-            #sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.0.37:9000 -Dsonar.login=${SONAR_KEY}
+            #sonar-scanner -Dsonar.projectKey=${COMPONENT} -Dsonar.sources=. -Dsonar.host.url=http://172.31.86.87:9000 -Dsonar.login=${SONAR_KEY}
             echo Submit
           """
         }
@@ -67,7 +67,7 @@ def call(String COMPONENT) {
         steps {
           sh """
             VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
-            curl -f -v -u ${NEXUS} --upload-file ${COMPONENT}-\${VERSION}.zip http://172.31.7.98:8081/repository/${COMPONENT}/${COMPONENT}-\${VERSION}.zip
+            curl -f -v -u ${NEXUS} --upload-file ${COMPONENT}-\${VERSION}.zip http://172.31.13.236:8081/repository/${COMPONENT}/${COMPONENT}-\${VERSION}.zip
           """
         }
       }
