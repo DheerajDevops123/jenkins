@@ -77,9 +77,10 @@ def call(String COMPONENT) {
         when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           script {
-            def VERSION=GIT_BRANCH.split("/").last()
+            def VERSION = GIT_BRANCH.split("/").last()
             build job: 'AppDeploy', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: 'dev'), string(name: 'APP_VERSION', value: "${VERSION}")]
           }
+        }
       }
     }
 
