@@ -81,12 +81,12 @@ def call(String COMPONENT) {
           }
         }
       }
+    }
 
       post {
         always {
           cleanWs()
         }
       }
-    }
   }
 }
