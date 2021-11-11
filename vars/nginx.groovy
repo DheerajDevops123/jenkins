@@ -62,22 +62,22 @@ def call(String COMPONENT) {
         }
       }
 
-//      stage('Publish Artifacts') {
-//        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
-//        steps {
-//          sh """
-//            VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
-//            curl -f -v -u ${NEXUS} --upload-file ${COMPONENT}-\${VERSION}.zip http://172.31.13.236:8081/repository/${COMPONENT}/${COMPONENT}-\${VERSION}.zip
-//          """
-//        }
-//      }
+      stage('Publish Artifacts') {
+        when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
+        steps {
+          sh """
+            VERSION=`echo ${GIT_BRANCH}|awk -F / '{print \$NF}'`
+            curl -f -v -u ${NEXUS} --upload-file ${COMPONENT}-\${VERSION}.zip http://172.31.13.236:8081/repository/${COMPONENT}/${COMPONENT}-\${VERSION}.zip
+          """
+        }
+      }
 
       stage('Dev Deployment') {
         when { expression { sh([returnStdout: true, script: 'echo ${GIT_BRANCH} | grep tags || true']) } }
         steps {
           script {
             def VERSION = GIT_BRANCH.split("/").last()
-            build job: 'AppDeploy', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: 'dev'), string(name: 'APP_VERSION', value: "${VERSION}")]
+            build job: 'AppDeploy', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: 'prod'), string(name: 'APP_VERSION', value: "${VERSION}")]
           }
         }
       }

@@ -77,7 +77,7 @@ def call(String COMPONENT) {
         steps {
           script {
             def VERSION=GIT_BRANCH.split("/").last()
-            build job: 'AppDeploy', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: 'dev'), string(name: 'APP_VERSION', value: "${VERSION}")]
+            build job: 'AppDeploy', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: 'prod'), string(name: 'APP_VERSION', value: "${VERSION}")]
           }
         }
       }
